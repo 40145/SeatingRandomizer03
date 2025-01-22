@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>จัดที่นั่งสุ่ม</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #f4f4f4;
+        }
+
+        .grid-container {
+            display: grid;
+            /* 
+               หมายเหตุ: grid-template-columns จะตั้งจาก JavaScript ได้
+               ถ้าอยากให้ยืดตาม columns ที่ผู้ใช้กรอก 
+               แต่ถ้าเอาง่าย ๆ จะคงเป็น repeat(5, 1fr) ไปก่อนก็ได้
+            */
+            grid-template-columns: repeat(5, 1fr);
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .seat {
+            border: 1px solid #000;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f4f4f4;
+        }
+
+        .seat.large {
+            background-color: #ffe4b2;
+        }
+
+        .seat.front {
+            background-color: #b2d8ff;
+        }
+
+        .seat.bad-history {
+            background-color: #ffb2b2;
+        }
+    </style>
+</head>
+<body>
+    <h1>จัดที่นั่งสุ่ม</h1>
+
+    <!-- ส่วนเพิ่ม: ช่องกรอกขนาดห้อง และจำนวนนักเรียน -->
+    <label for="num-rows">แถวตอนลึก (Rows):</label>
+    <input type="number" id="num-rows" min="1" value="11">
+    &nbsp;&nbsp;
+    <label for="num-cols">แถวตอนหน้า (Columns):</label>
+    <input type="number" id="num-cols" min="1" value="5">
+    <br><br>
+
+    <label for="num-students">จำนวนนักเรียน:</label>
+    <input type="number" id="num-students" min="1" value="52">
+    <button type="button" id="generate-inputs">สร้างฟอร์ม</button>
+    <br><br>
+
+    <form id="student-form">
+        <h2>ข้อมูลนักเรียน</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>เลขที่</th>
+                    <th>คะแนน (1-10)</th>
+                    <th>สายตา (0=ดี, 1=ไม่ดี)</th>
+                    <th>ขนาดตัว (0=ปกติ, 1=ใหญ่)</th>
+                    <th>ประวัติไม่ดี (0=ไม่มี, 1=มี)</th>
+                </tr>
+            </thead>
+            <tbody id="student-inputs">
+                <!-- ช่องสำหรับกรอกข้อมูลนักเรียนจะถูกสร้างโดย JavaScript -->
+            </tbody>
+        </table>
+        <button type="button" id="generate-seating">สุ่มที่นั่ง</button>
+    </form>
+
+    <h2>แผนที่นั่ง</h2>
+    <div class="grid-container" id="seating-chart"></div>
+
+    <!-- ลิงก์ไปยังไฟล์สคริปต์ -->
+    <script src="script.js"></script>
+</body>
+</html>
